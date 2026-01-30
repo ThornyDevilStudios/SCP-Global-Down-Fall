@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=3 uid="uid://b4rllyo810ctr"]
+
+[ext_resource type="PackedScene" uid="uid://ltg4mq4lbma" path="res://Worlds/world_environment.tscn" id="1_tvhjp"]
+[ext_resource type="PackedScene" uid="uid://dm5hajfywhc2e" path="res://Objects/Hallway.tscn" id="2_q2m3m"]
+[ext_resource type="PackedScene" uid="uid://dfb34fkae0pm3" path="res://Character/-naked_body-.tscn" id="3_wsfy1"]
+[ext_resource type="BoxMesh" uid="uid://bt1ssh2e6v1pf" path="res://Textures/BLACK.tres" id="4_ukgsq"]
+[ext_resource type="Shader" path="res://Shader/screen_shader.gdshader" id="5_4lswa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0kkt6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_83y8a"]
+shader = ExtResource("5_4lswa")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(6000, 8000)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 0.75
+shader_parameter/roll_size = 20.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.01
+shader_parameter/noise_opacity = 0.23
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.5
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 1.0
+
+[node name="Lv_1" type="Node3D"]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_tvhjp")]
+
+[node name="untitled" parent="." instance=ExtResource("2_q2m3m")]
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("3_wsfy1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.117802, -1.86631, 0.042406)
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(87.6413, 0, 0, 0, 6.99477, 0, 0, 0, 1, 0, 0, -43.4275)
+mesh = ExtResource("4_ukgsq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
+shape = SubResource("BoxShape3D_0kkt6")
+
+[node name="Wall3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.83092e-06, 0, 1, 0, 6.99477, 0, -87.6413, 0, -4.37114e-08, -43.4735, 0, 0.101543)
+mesh = ExtResource("4_ukgsq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3/StaticBody3D"]
+shape = SubResource("BoxShape3D_0kkt6")
+
+[node name="Wall4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.83092e-06, 0, 1, 0, 6.99477, 0, -87.6413, 0, -4.37114e-08, 43.5999, 0, 0.101543)
+mesh = ExtResource("4_ukgsq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4/StaticBody3D"]
+shape = SubResource("BoxShape3D_0kkt6")
+
+[node name="Wall2" type="MeshInstance3D" parent="."]
+transform = Transform3D(87.6413, 0, 0, 0, 6.99477, 0, 0, 0, 1, 0, 0, 43.4886)
+mesh = ExtResource("4_ukgsq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2/StaticBody3D"]
+shape = SubResource("BoxShape3D_0kkt6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_83y8a")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2

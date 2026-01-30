@@ -1,0 +1,149 @@
+[gd_scene load_steps=4 format=3 uid="uid://vpl4iuc6t4jm"]
+
+[ext_resource type="Script" path="res://script/settings.gd" id="1_qguou"]
+[ext_resource type="Texture2D" uid="uid://bnmf7k2gtuc5v" path="res://Textures/Screenshot 2025-01-15 175209.png" id="2_mdquf"]
+[ext_resource type="AudioStream" uid="uid://bi118c73ve1lk" path="res://Sounds/0114.MP3" id="3_6hsha"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qguou")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576.5, 324.863)
+scale = Vector2(1.34149, 1.33941)
+texture = ExtResource("2_mdquf")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Vol_Slider" type="HSlider" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -257.0
+offset_top = -125.0
+offset_right = 243.0
+offset_bottom = -109.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.997)
+max_value = 50.0
+
+[node name="Volume" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -184.0
+offset_right = -109.0
+offset_bottom = -129.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 0.997)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Volume
+"
+language = "en"
+
+[node name="Win_OptionButton" type="OptionButton" parent="Control"]
+layout_mode = 2
+offset_left = 318.0
+offset_top = 286.0
+offset_right = 818.0
+offset_bottom = 317.0
+scale = Vector2(1, 0.997)
+selected = 0
+item_count = 2
+popup/item_0/text = "Window"
+popup/item_1/text = "Fullscreen"
+popup/item_1/id = 1
+
+[node name="Window-Mode" type="Label" parent="Control"]
+layout_mode = 2
+offset_left = 316.0
+offset_top = 229.0
+offset_right = 595.0
+offset_bottom = 284.0
+scale = Vector2(1, 0.997)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Window-Mode
+"
+language = "en"
+
+[node name="CheckBox" type="CheckBox" parent="Control"]
+layout_mode = 2
+offset_left = 327.0
+offset_top = 378.0
+offset_right = 351.0
+offset_bottom = 402.0
+scale = Vector2(1, 0.997)
+
+[node name="Mute" type="Label" parent="Control"]
+layout_mode = 2
+offset_left = 316.0
+offset_top = 321.0
+offset_right = 417.0
+offset_bottom = 376.0
+scale = Vector2(1, 0.997)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Mute
+"
+language = "en"
+
+[node name="Res_OptionButton" type="OptionButton" parent="Control"]
+layout_mode = 2
+offset_left = 321.0
+offset_top = 473.0
+offset_right = 821.0
+offset_bottom = 504.0
+scale = Vector2(1, 0.997)
+selected = 0
+item_count = 4
+popup/item_0/text = "1366 x 768"
+popup/item_1/text = "1920 x 1080"
+popup/item_1/id = 1
+popup/item_2/text = "2560 x 1440"
+popup/item_2/id = 2
+popup/item_3/text = "3840 x 2160"
+popup/item_3/id = 3
+
+[node name="Resolution" type="Label" parent="Control"]
+layout_mode = 2
+offset_left = 320.0
+offset_top = 410.0
+offset_right = 526.0
+offset_bottom = 465.0
+scale = Vector2(1, 0.997)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "Resolution
+"
+language = "en"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6hsha")
+autoplay = true
+
+[connection signal="value_changed" from="Control/Vol_Slider" to="." method="_on_vol_slider_value_changed"]
+[connection signal="item_selected" from="Control/Win_OptionButton" to="." method="_on_win_option_button_item_selected"]
+[connection signal="toggled" from="Control/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="item_selected" from="Control/Res_OptionButton" to="." method="_on_res_option_button_item_selected"]

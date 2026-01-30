@@ -1,0 +1,213 @@
+[gd_scene load_steps=19 format=3 uid="uid://dmvn8vu5pe0of"]
+
+[ext_resource type="PackedScene" uid="uid://dfb34fkae0pm3" path="res://Character/-naked_body-.tscn" id="1_agqs2"]
+[ext_resource type="PackedScene" uid="uid://ltg4mq4lbma" path="res://Worlds/world_environment.tscn" id="2_erp1i"]
+[ext_resource type="Sky" uid="uid://g1s2ts56gba4" path="res://Worlds/sky.tres" id="3_6ypcn"]
+[ext_resource type="Shader" path="res://Shader/vhs_shader.gdshader" id="4_62isw"]
+[ext_resource type="Texture2D" uid="uid://glqub3kr1okd" path="res://Textures/Ground078_1K-PNG_Color.png" id="5_3f5o6"]
+[ext_resource type="Texture2D" uid="uid://dgntd5lkp7lxj" path="res://Textures/EasterEggg1.png" id="6_0eg1m"]
+[ext_resource type="BoxMesh" uid="uid://beb7rte5rt5nr" path="res://Meshs/debug_obj.tres" id="6_pusp5"]
+[ext_resource type="PackedScene" uid="uid://10dwl1jlscpl" path="res://Objects/grnd.glb" id="7_82wp4"]
+[ext_resource type="Shader" path="res://Shader/screen_shader.gdshader" id="8_ycevi"]
+[ext_resource type="PackedScene" uid="uid://berd5ao206b5h" path="res://Objects/InteriorTest.glb" id="9_45evx"]
+[ext_resource type="PackedScene" uid="uid://pfmp6sal1xif" path="res://Character/Player.tscn" id="10_ar2oo"]
+
+[sub_resource type="Environment" id="Environment_fsjcj"]
+background_mode = 2
+background_energy_multiplier = 0.0
+sky = ExtResource("3_6ypcn")
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
+reflected_light_source = 2
+tonemap_mode = 2
+ssao_enabled = true
+sdfgi_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7u8va"]
+render_priority = 0
+shader = ExtResource("4_62isw")
+shader_parameter/affine_mapping = false
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.1
+shader_parameter/resolution = Vector2i(320, 240)
+shader_parameter/albedo = ExtResource("5_3f5o6")
+
+[sub_resource type="BoxMesh" id="BoxMesh_uvp0h"]
+material = SubResource("ShaderMaterial_7u8va")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i26rn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ymynv"]
+albedo_texture = ExtResource("6_0eg1m")
+uv1_scale = Vector3(3, 2, 0)
+uv1_triplanar_sharpness = 0.116629
+
+[sub_resource type="BoxMesh" id="BoxMesh_gu38l"]
+material = SubResource("StandardMaterial3D_ymynv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5a5hc"]
+shader = ExtResource("8_ycevi")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(6000, 8000)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 0.75
+shader_parameter/roll_size = 20.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.01
+shader_parameter/noise_opacity = 0.23
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 1.4
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.5
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 1.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_agqs2")]
+JUMP_VELOCITY = null
+CROUCH_SPEED = null
+MOUSE_SENSITIVITY = null
+TILT_LOWER_LIMIT = null
+TILT_UPPER_LIMIT = null
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("2_erp1i")]
+environment = SubResource("Environment_fsjcj")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_uvp0h")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_i26rn")
+
+[node name="EasterEGG" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.40986, 0, 0, 0, 1, 0, 0, 0, 0.832635, 3.21921, -0.750374, -14.1688)
+mesh = SubResource("BoxMesh_gu38l")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="EasterEGG"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EasterEGG/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_i26rn")
+
+[node name="Floor5" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, -10, -0.5, 0)
+mesh = SubResource("BoxMesh_uvp0h")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor5/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_i26rn")
+
+[node name="Floor9" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, -10, -0.5, -10.0737)
+mesh = SubResource("BoxMesh_uvp0h")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor9"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor9/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_i26rn")
+
+[node name="Floor2" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 0.994522, -1.04528, 0, 0.104528, 9.94522, 0, 0, -10)
+mesh = SubResource("BoxMesh_uvp0h")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_i26rn")
+
+[node name="Floor3" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 0.5, 0, 0, 0, 2, -2, 1.75, 2)
+mesh = ExtResource("6_pusp5")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_i26rn")
+
+[node name="Floor6" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 6.2015, 0, 0, 0, 2, -12.0072, 2.84379, 1.07894)
+mesh = ExtResource("6_pusp5")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor6/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_i26rn")
+
+[node name="Floor7" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 6.2015, 0, 0, 0, 2, -12.0072, 0.368054, -2.54987)
+mesh = ExtResource("6_pusp5")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor7/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_i26rn")
+
+[node name="Floor8" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 6.2015, 0, 0, 0, 2, -0.331806, 0.368054, -9.58706)
+mesh = ExtResource("6_pusp5")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor8/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_i26rn")
+
+[node name="Floor4" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 0.5, 0, 0, 0, 2, -2, 2.25, -2)
+mesh = ExtResource("6_pusp5")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_i26rn")
+
+[node name="grnd" parent="." instance=ExtResource("7_82wp4")]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -31.8807, -4.36833, -2.52894)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_5a5hc")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+
+[node name="InteriorTest" parent="." instance=ExtResource("9_45evx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.22181, 1.37259, -6.45771)
+
+[node name="Player" parent="." instance=ExtResource("10_ar2oo")]
+transform = Transform3D(0.287481, 0, 0, 0, 0.287481, 0, 0, 0, 0.287481, -8.35442, 0.0693151, -8.87967)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.994654, 0, -0.103261, 0, 1, 0, 0.103261, 0, -0.994654, 3.14972, -0.697822, -16)
+spot_range = 2.8064

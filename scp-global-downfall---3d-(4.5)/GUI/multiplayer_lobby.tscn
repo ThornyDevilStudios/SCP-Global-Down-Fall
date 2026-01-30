@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu1quu6hxpbeg"]
+
+[ext_resource type="Script" path="res://script/multiplayer_lobby.gd" id="1_wggqq"]
+[ext_resource type="PackedScene" uid="uid://dfb34fkae0pm3" path="res://Character/-naked_body-.tscn" id="2_nh1aj"]
+
+[node name="Multiplayer-Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wggqq")
+player_scene = ExtResource("2_nh1aj")
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -81.0
+offset_right = 50.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "HOST"
+
+[node name="join" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -10.0
+offset_right = 50.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "JOIN"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Character/-naked_body-.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="join" to="." method="_on_join_pressed"]

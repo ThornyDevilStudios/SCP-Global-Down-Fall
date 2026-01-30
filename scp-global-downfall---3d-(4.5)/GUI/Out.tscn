@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://r15cda6ikvx2"]
+
+[ext_resource type="Script" path="res://script/out.gd" id="1_0ghnu"]
+[ext_resource type="VideoStream" path="res://Movies/InOut_reverse.ogv" id="1_u41h3"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0ghnu")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_u41h3")
+autoplay = true
+expand = true
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]

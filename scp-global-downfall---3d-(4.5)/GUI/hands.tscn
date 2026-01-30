@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://ck2mioinrwo0n"]
+
+[ext_resource type="VideoStream" path="res://Movies/idle_hand.ogv" id="1_eccu0"]
+[ext_resource type="Script" path="res://GUI/hands.gd" id="1_g870a"]
+[ext_resource type="Shader" path="res://Shader/green_screen.gdshader" id="2_5kr8n"]
+[ext_resource type="VideoStream" path="res://Movies/takedown1.ogv" id="2_iw4il"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dmlep"]
+shader = ExtResource("2_5kr8n")
+shader_parameter/key_color = Color(0, 1, 0, 1)
+shader_parameter/similarity = 0.4
+shader_parameter/smoothness = 0.08
+shader_parameter/spill = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uk30a"]
+shader = ExtResource("2_5kr8n")
+shader_parameter/key_color = Color(0, 0.188, 0.035, 1)
+shader_parameter/similarity = 0.4
+shader_parameter/smoothness = 0.08
+shader_parameter/spill = 0.1
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g870a")
+
+[node name="idle" type="VideoStreamPlayer" parent="."]
+material = SubResource("ShaderMaterial_dmlep")
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1088.0
+scale = Vector2(0.600007, 0.595703)
+stream = ExtResource("1_eccu0")
+autoplay = true
+loop = true
+
+[node name="takedown1" type="VideoStreamPlayer" parent="."]
+material = SubResource("ShaderMaterial_uk30a")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 768.0
+offset_bottom = 440.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.600002, 0.595608)
+stream = ExtResource("2_iw4il")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cvlq2u7ylo3c2"
+path="res://.godot/imported/Footsteps Walking Around On Wood - QuickSounds (mp3cut.net).mp3-77f029649936a6bf694a5c165cfda15c.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Footsteps Walking Around On Wood - QuickSounds (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/Footsteps Walking Around On Wood - QuickSounds (mp3cut.net).mp3-77f029649936a6bf694a5c165cfda15c.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvhsf3eyxm3gs"]
+
+[ext_resource type="Script" path="res://takedown.gd" id="1_3t4a2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rocip"]
+size = Vector3(1, 1, 0.263184)
+
+[node name="Takedown" type="Node3D"]
+script = ExtResource("1_3t4a2")
+
+[node name="TakedownBox" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TakedownBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.368408)
+shape = SubResource("BoxShape3D_rocip")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="TakedownBox"]
+
+[node name="Label" type="Label" parent="TakedownBox/CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -22.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+text = "Takedown (F)"
+
+[connection signal="area_entered" from="TakedownBox" to="." method="_on_takedown_box_area_entered"]
+[connection signal="area_exited" from="TakedownBox" to="." method="_on_takedown_box_area_exited"]

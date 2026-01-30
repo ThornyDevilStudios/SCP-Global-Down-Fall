@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ltg4mq4lbma"]
+
+[ext_resource type="Sky" uid="uid://g1s2ts56gba4" path="res://Worlds/sky.tres" id="1_4dteh"]
+
+[sub_resource type="Environment" id="Environment_va1et"]
+background_mode = 2
+sky = ExtResource("1_4dteh")
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource("Environment_va1et")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.99813, 0.0103829, 0.0602298, -0.0609856, 0.234079, 0.970303, -0.00402393, -0.972162, 0.234274, 0, 0, 0)
+light_energy = 0.3
+shadow_enabled = true

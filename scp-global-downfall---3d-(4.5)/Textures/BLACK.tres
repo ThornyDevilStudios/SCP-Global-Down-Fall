@@ -1,0 +1,9 @@
+[gd_resource type="BoxMesh" load_steps=3 format=3 uid="uid://bt1ssh2e6v1pf"]
+
+[ext_resource type="Texture2D" uid="uid://ilrljf4bq6tw" path="res://Textures/SCP_Foundation_(emblem).svg.png" id="1_o1jhv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jh7wf"]
+albedo_texture = ExtResource("1_o1jhv")
+
+[resource]
+material = SubResource("StandardMaterial3D_jh7wf")

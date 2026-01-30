@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqyd3qrilwyll"]
+
+[ext_resource type="PackedScene" uid="uid://ltg4mq4lbma" path="res://Worlds/world_environment.tscn" id="1_7cie4"]
+[ext_resource type="Shader" uid="uid://c6u28t7lyhqww" path="res://Shader/vhs_shader.gdshader" id="1_pkdmd"]
+[ext_resource type="Texture2D" uid="uid://glqub3kr1okd" path="res://Textures/Ground078_1K-PNG_Color.png" id="2_cj32v"]
+[ext_resource type="PackedScene" uid="uid://dfb34fkae0pm3" path="res://Character/-naked_body-.tscn" id="4_ogxxa"]
+[ext_resource type="PackedScene" uid="uid://ud86xq400yv6" path="res://Character/npc_m.tscn" id="5_7t3je"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q206k"]
+render_priority = 0
+shader = ExtResource("1_pkdmd")
+shader_parameter/affine_mapping = false
+shader_parameter/albedo = ExtResource("2_cj32v")
+shader_parameter/alpha_scissor = 0.5
+shader_parameter/jitter = 0.1
+shader_parameter/resolution = Vector2i(320, 240)
+
+[sub_resource type="BoxMesh" id="BoxMesh_olqwp"]
+material = SubResource("ShaderMaterial_q206k")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r645c"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_7cie4")]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_olqwp")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_r645c")
+
+[node name="Floor" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(9.999999, 0, 0, 0, 0.010803326, -9.999415, 0, 0.9999416, 0.10803325, 0, -0.5, -1.0453873)
+mesh = SubResource("BoxMesh_olqwp")
+skeleton = NodePath("StaticBody3D/CollisionShape3D")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/Floor/StaticBody3D"]
+transform = Transform3D(0.954143, 0, 0, 0, 0.954143, 0, 0, 0, 0.954143, 0, 0, 0)
+shape = SubResource("BoxShape3D_r645c")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("4_ogxxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0215223, 0.977072, 3.61792)
+
+[node name="BasicMotions_DummyModel_M2" parent="." instance=ExtResource("5_7t3je")]
+transform = Transform3D(-0.99999976, 0, -8.7422755e-08, 0, 1, 0, 8.7422755e-08, 0, -0.99999976, 3.3484573, -0.021589594, -0.4787747)
+
+[node name="BasicMotions_DummyModel_M3" parent="." instance=ExtResource("5_7t3je")]
+transform = Transform3D(0.9999996, 0, 0, 0, 1, 0, 0, 0, 0.9999996, -0.025770664, -0.033369694, -0.2984339)

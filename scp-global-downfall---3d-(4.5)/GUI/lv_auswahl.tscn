@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwu8gis3i4hc"]
+
+[ext_resource type="Texture2D" uid="uid://bnmf7k2gtuc5v" path="res://Textures/Screenshot 2025-01-15 175209.png" id="1_tltv2"]
+[ext_resource type="Script" path="res://script/lv_auswahl.gd" id="1_xkobs"]
+[ext_resource type="AudioStream" uid="uid://bi118c73ve1lk" path="res://Sounds/0114.MP3" id="3_js5qd"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xkobs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324.001)
+scale = Vector2(1.34266, 1.33884)
+texture = ExtResource("1_tltv2")
+
+[node name="Test-Map" type="Button" parent="."]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 40.0
+offset_right = 160.0
+offset_bottom = 90.0
+scale = Vector2(2, 2)
+text = "Test-Map"
+
+[node name="Lv_1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 43.0
+offset_right = 396.0
+offset_bottom = 93.0
+scale = Vector2(2, 2)
+text = "Lv. 1"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_js5qd")
+autoplay = true
+
+[connection signal="pressed" from="Test-Map" to="." method="_on_test_map_pressed"]
+[connection signal="pressed" from="Lv_1" to="." method="_on_lv_1_pressed"]
